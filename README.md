@@ -40,3 +40,19 @@ ClientFlow is a work in progress. Future improvements will focus on usability, b
 ---
 
 *Built with ☕, curiosity, and a lot of debugging by [Udita Majumder](https://github.com/UditaMajumder).*
+
+---
+
+## 📸 See ClientFlow in Action
+
+### 📊 Dashboard
+![ClientFlow Dashboard](Dashboard.png)
+
+### 👥 Client Management
+![Client Management](ClientsPage.png)
+
+### 🚀 Project Management
+![Project Management](ProjectsPage.png)
+
+### 🏆 Completed Work
+![Completed Work](CompletedWorkPage.png)
