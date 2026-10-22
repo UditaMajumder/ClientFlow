@@ -87,14 +87,19 @@ function DeleteConfirmModal({
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [userName, setUserName] = useState(localStorage.getItem("userName") || "");
 
-  const handleLogin = (token) => {
+  const handleLogin = (token, name) => {
   localStorage.setItem("token", token);
+  localStorage.setItem("userName", name);
+  setUserName(name);
   setToken(token);
 };
 
  const handleLogout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("userName");
+  setUserName("");
   setLoginEmail("");
   setLoginPassword("");
   setToken(null);
@@ -115,7 +120,7 @@ const handleLoginSubmit = () => {
     password: loginPassword
   })
   .then((response) => {
-    handleLogin(response.data.token);
+    handleLogin(response.data.token, response.data.name);
   })
   .catch((error) => {
     console.log(error);
@@ -1143,7 +1148,7 @@ return (
     ? "Good morning"
     : new Date().getHours() < 17
     ? "Good afternoon"
-    : "Good evening"}{" "}
+    : "Good evening"}{userName ? `, ${userName}` : ""}{" "}
   👋
 </h2>
           <p>Manage your clients and projects in one place.</p>

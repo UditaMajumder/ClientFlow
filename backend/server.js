@@ -119,9 +119,10 @@ app.post("/login", async (req, res) => {
     );
 
     res.json({
-      message: "Login successful",
-      token
-    });
+  message: "Login successful",
+  token,
+  name: user.name
+});
 
   } catch (error) {
     console.log(error);
@@ -216,12 +217,22 @@ if (!deletedClient) {
 
 
 app.get("/projects", authMiddleware, async (req, res) => {
-  const projects = await Project.find({
-  userId: req.userId
-}).populate("client");
-  res.json(projects);
-});
+  try {
+    const projects = await Project.find({
+      userId: req.userId
+    }).populate({
+      path: "client",
+      match: { userId: req.userId }
+    });
 
+    res.json(projects);
+  } catch (error) {
+    console.error("GET PROJECTS ERROR:", error);
+    res.status(500).json({
+      message: "Server error"
+    });
+  }
+});
 
 app.post("/projects", authMiddleware, async (req, res) => {
   try {
